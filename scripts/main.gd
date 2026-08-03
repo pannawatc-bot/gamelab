@@ -57,6 +57,8 @@ func _ready() -> void:
 	_setup_audio()
 	if "--qa-gameplay" in OS.get_cmdline_user_args():
 		start_game()
+	elif "--qa-credits" in OS.get_cmdline_user_args():
+		state = GameState.CREDITS
 	queue_redraw()
 
 func _setup_audio() -> void:
@@ -431,30 +433,37 @@ func _draw_background() -> void:
 
 func _draw_menu() -> void:
 	draw_rect(Rect2(0, 0, W, H), Color(0.02, 0.035, 0.09, 0.38))
-	draw_rect(Rect2(380, 78, 520, 548), Color(0.025, 0.045, 0.12, 0.90), true)
-	draw_rect(Rect2(380, 78, 520, 548), Color("#67f5e5"), false, 3)
+	_round_rect(Rect2(380, 78, 520, 548), Color(0.025, 0.045, 0.12, 0.93), 30, Color(0.40, 0.96, 0.90, 0.75), 2)
 	_text("SKYFORGE", Vector2(640, 180), 58, Color("#ffffff"), true)
 	_text("RUNNER", Vector2(640, 238), 46, Color("#67f5e5"), true)
 	_text("ผจญภัยเหนือหมู่เกาะลอยฟ้า", Vector2(640, 292), 24, Color("#dbe9ff"), true)
 	for key in ["play", "credits", "exit"]:
 		var r: Rect2 = button_rects[key]
 		var hover := r.has_point(get_local_mouse_position())
-		draw_rect(r, Color("#5d4fd6") if hover else Color(0.08, 0.13, 0.29, 0.96), true)
-		draw_rect(r, Color("#7df9ff"), false, 2)
+		_round_rect(r, Color("#5d62d6") if hover else Color(0.08, 0.13, 0.29, 0.96), 18, Color(0.45, 0.95, 0.94, 0.85), 2)
 	var labels := {"play":"เริ่มเกม", "credits":"เครดิต", "exit":"ออกจากเกม"}
 	for key in labels: _text(labels[key], button_rects[key].get_center() + Vector2(0, 9), 25, Color.WHITE, true)
 	_text("ENTER เริ่มเกม  •  เล่นด้วยคีย์บอร์ด", Vector2(640, 662), 18, Color("#cbd7ed"), true)
 
 func _draw_credits() -> void:
-	draw_rect(Rect2(230, 105, 820, 510), Color(0.025, 0.045, 0.12, 0.94), true)
-	draw_rect(Rect2(230, 105, 820, 510), Color("#a98cff"), false, 3)
-	_text("CREDITS", Vector2(640, 180), 44, Color("#a98cff"), true)
-	_text("สร้างโดย " + STUDENT_NAME, Vector2(640, 255), 28, Color.WHITE, true)
-	_text("รหัสนักศึกษา " + STUDENT_ID, Vector2(640, 292), 20, Color("#cbd7ed"), true)
-	_text("งานภาพฉากหลังสร้างด้วย OpenAI ImageGen", Vector2(640, 363), 21, Color("#7df9ff"), true)
-	_text("ระบบเกม อาร์ตตัวละคร และเสียง: Godot 4 + GDScript", Vector2(640, 401), 20, Color("#dbe9ff"), true)
-	_text("แบบฝึกหัดที่ 4 — 2D Platform Side-Scrolling", Vector2(640, 460), 21, Color("#ffcf75"), true)
-	_text("คลิกหรือกด ESC เพื่อกลับ", Vector2(640, 560), 18, Color("#cbd7ed"), true)
+	_round_rect(Rect2(260, 105, 760, 510), Color(0.025, 0.045, 0.12, 0.95), 34, Color(0.66, 0.55, 1.0, 0.70), 2)
+	draw_circle(Vector2(640, 170), 34, Color(0.35, 0.32, 0.82, 0.55))
+	draw_circle(Vector2(640, 170), 22, Color("#7df9ff"), false, 4)
+	draw_circle(Vector2(640, 170), 7, Color("#ffda72"))
+	_text("SKYFORGE RUNNER", Vector2(640, 246), 34, Color.WHITE, true)
+	_text("CREATED BY", Vector2(640, 282), 14, Color("#7df9ff"), true)
+	_text(STUDENT_NAME, Vector2(640, 328), 27, Color("#f2f6ff"), true)
+	_text(STUDENT_ID, Vector2(640, 361), 18, Color("#aebbd5"), true)
+	var chips := [
+		{"rect":Rect2(345, 414, 170, 46), "text":"4 LEVELS"},
+		{"rect":Rect2(555, 414, 170, 46), "text":"3 ENEMIES"},
+		{"rect":Rect2(765, 414, 170, 46), "text":"GODOT 4"}
+	]
+	for chip in chips:
+		_round_rect(chip.rect, Color(0.12, 0.17, 0.34, 0.94), 18, Color(0.48, 0.90, 0.93, 0.42), 1)
+		_text(chip.text, chip.rect.get_center() + Vector2(0, 6), 15, Color("#dce9ff"), true)
+	_text("2D PLATFORM ADVENTURE", Vector2(640, 512), 17, Color("#ffda72"), true)
+	_text("คลิกหรือกด ESC เพื่อกลับ", Vector2(640, 570), 17, Color("#9facc8"), true)
 
 func _draw_world() -> void:
 	var accent: Color = theme_colors[level - 1]
@@ -579,3 +588,18 @@ func _text(text: String, pos: Vector2, size: int, color := Color.WHITE, centered
 	if centered:
 		p.x -= font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x * 0.5
 	draw_string(font, p, text, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+
+func _round_rect(rect: Rect2, color: Color, radius: int, border_color := Color.TRANSPARENT, border_width := 0) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = color
+	style.corner_radius_top_left = radius
+	style.corner_radius_top_right = radius
+	style.corner_radius_bottom_left = radius
+	style.corner_radius_bottom_right = radius
+	if border_width > 0:
+		style.border_color = border_color
+		style.border_width_left = border_width
+		style.border_width_top = border_width
+		style.border_width_right = border_width
+		style.border_width_bottom = border_width
+	draw_style_box(style, rect)
