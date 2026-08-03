@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1qtw"]
+radius = 22.0
+
+[node name="SpeedItem" type="Area2D" unique_id=465456830]
+metadata/item_type = "speed"
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=1480376627]
+color = Color(1, 0.80784315, 0.4, 1)
+polygon = PackedVector2Array(0, -22, 17, 0, 0, 22, -17, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=302501787]
+shape = SubResource("CircleShape2D_v1qtw")
+
+[node name="PickupEffect" type="GPUParticles2D" parent="." unique_id=1670023098]
+emitting = false
+amount = 12
+one_shot = true

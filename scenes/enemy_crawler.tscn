@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/components/enemy_ai.gd" id="1_gr1st"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skyforge_atlas.png" id="2_cr8ov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcvqb"]
+atlas = ExtResource("2_cr8ov")
+region = Rect2(0, 313, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lfsf"]
+atlas = ExtResource("2_cr8ov")
+region = Rect2(313, 313, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33hdp"]
+atlas = ExtResource("2_cr8ov")
+region = Rect2(626, 313, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8vmy"]
+atlas = ExtResource("2_cr8ov")
+region = Rect2(939, 313, 313, 313)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_npe4l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcvqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lfsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33hdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8vmy")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sq3cn"]
+radius = 22.0
+height = 46.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sy8n3"]
+emission_shape = 1
+emission_sphere_radius = 12.0
+initial_velocity_min = 90.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 420, 0)
+color = Color(1, 0.41960785, 0.49803922, 1)
+
+[node name="Crawler" type="CharacterBody2D" unique_id=314773148]
+script = ExtResource("1_gr1st")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=780781249]
+scale = Vector2(0.24, 0.24)
+sprite_frames = SubResource("SpriteFrames_npe4l")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=433807506]
+shape = SubResource("CapsuleShape2D_sq3cn")
+
+[node name="Explosion" type="GPUParticles2D" parent="." unique_id=732796689]
+emitting = false
+amount = 28
+lifetime = 0.7
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_sy8n3")

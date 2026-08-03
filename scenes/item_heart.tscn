@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_adnih"]
+radius = 22.0
+
+[node name="HeartItem" type="Area2D" unique_id=502630483]
+metadata/item_type = "heart"
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=1527109969]
+color = Color(1, 0.3647059, 0.47058824, 1)
+polygon = PackedVector2Array(0, -22, 17, 0, 0, 22, -17, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676055253]
+shape = SubResource("CircleShape2D_adnih")
+
+[node name="PickupEffect" type="GPUParticles2D" parent="." unique_id=2014115423]
+emitting = false
+amount = 12
+one_shot = true

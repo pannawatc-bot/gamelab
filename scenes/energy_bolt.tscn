@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/components/projectile.gd" id="1_d5ago"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vebnk"]
+size = Vector2(32, 10)
+
+[node name="EnergyBolt" type="Area2D" unique_id=1700199656]
+script = ExtResource("1_d5ago")
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=720033997]
+color = Color(0.49019608, 0.9764706, 1, 1)
+polygon = PackedVector2Array(-14, -5, 14, -5, 20, 0, 14, 5, -14, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083643574]
+shape = SubResource("RectangleShape2D_vebnk")

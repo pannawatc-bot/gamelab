@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[node name="GameOver" type="Control" unique_id=66953401]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=979677765]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 160.0
+offset_right = 980.0
+offset_bottom = 560.0
+color = Color(0.02, 0.04, 0.12, 0.92)
+
+[node name="Title" type="Label" parent="." unique_id=2097525504]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 220.0
+offset_right = 940.0
+offset_bottom = 480.0
+theme_override_font_sizes/font_size = 30
+text = "GAME OVER
+กด R เพื่อลองใหม่"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gosu"]
+radius = 22.0
+
+[node name="CrystalItem" type="Area2D" unique_id=1622539640]
+metadata/item_type = "crystal"
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=2119808970]
+color = Color(0.4392157, 0.972549, 1, 1)
+polygon = PackedVector2Array(0, -22, 17, 0, 0, 22, -17, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010369687]
+shape = SubResource("CircleShape2D_4gosu")
+
+[node name="PickupEffect" type="GPUParticles2D" parent="." unique_id=1335917991]
+emitting = false
+amount = 12
+one_shot = true

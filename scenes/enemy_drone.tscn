@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/components/enemy_ai.gd" id="1_thy4s"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skyforge_atlas.png" id="2_bcqnj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajfuj"]
+atlas = ExtResource("2_bcqnj")
+region = Rect2(0, 939, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5c6h"]
+atlas = ExtResource("2_bcqnj")
+region = Rect2(313, 939, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41c7k"]
+atlas = ExtResource("2_bcqnj")
+region = Rect2(626, 939, 313, 313)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04wfd"]
+atlas = ExtResource("2_bcqnj")
+region = Rect2(939, 939, 313, 313)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swdoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajfuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5c6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41c7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04wfd")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrcs6"]
+radius = 22.0
+height = 46.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3315q"]
+emission_shape = 1
+emission_sphere_radius = 12.0
+initial_velocity_min = 90.0
+initial_velocity_max = 240.0
+gravity = Vector3(0, 420, 0)
+color = Color(0.60784316, 0.4392157, 1, 1)
+
+[node name="Drone" type="CharacterBody2D" unique_id=669051844]
+script = ExtResource("1_thy4s")
+enemy_type = "drone"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1524098361]
+scale = Vector2(0.24, 0.24)
+sprite_frames = SubResource("SpriteFrames_swdoc")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1152385010]
+shape = SubResource("CapsuleShape2D_nrcs6")
+
+[node name="Explosion" type="GPUParticles2D" parent="." unique_id=411016042]
+emitting = false
+amount = 28
+lifetime = 0.7
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_3315q")

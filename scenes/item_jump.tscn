@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cj21x"]
+radius = 22.0
+
+[node name="JumpItem" type="Area2D" unique_id=1900577515]
+metadata/item_type = "jump"
+
+[node name="Visual" type="Polygon2D" parent="." unique_id=1484896381]
+color = Color(0.70980394, 0.5411765, 1, 1)
+polygon = PackedVector2Array(0, -22, 17, 0, 0, 22, -17, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=361850594]
+shape = SubResource("CircleShape2D_cj21x")
+
+[node name="PickupEffect" type="GPUParticles2D" parent="." unique_id=1449814501]
+emitting = false
+amount = 12
+one_shot = true

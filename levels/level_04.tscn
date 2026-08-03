@@ -1,0 +1,44 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/skyforge_background.png" id="1_fdgl0"]
+[ext_resource type="Texture2D" path="res://assets/tiles/skyforge_tiles.svg" id="2_hgv6m"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_slfeu"]
+texture = ExtResource("2_hgv6m")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, 0, -22, 32, 32)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_gg43x"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_slfeu")
+
+[node name="Level04" type="Node2D" unique_id=411828133]
+metadata/level_number = 4
+metadata/story = "Collect Sky Crystals and reach the portal across the floating ruins."
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=2008196279]
+scroll_scale = Vector2(0.15, 0.15)
+repeat_size = Vector2(1920, 720)
+
+[node name="SkyforgeBackground" type="Sprite2D" parent="Parallax2D" unique_id=417781747]
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("1_fdgl0")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1430799871]
+tile_map_data = PackedByteArray("AAAAAAkAAAABAAAAAAABAAkAAAABAAAAAAACAAkAAAABAAAAAAADAAkAAAABAAAAAAAEAAkAAAABAAAAAAAFAAkAAAABAAAAAAAGAAkAAAABAAAAAAAHAAkAAAABAAAAAAAIAAkAAAABAAAAAAAJAAkAAAABAAAAAAAKAAkAAAABAAAAAAALAAkAAAABAAAAAAAMAAkAAAABAAAAAAANAAkAAAABAAAAAAAOAAkAAAABAAAAAAAPAAkAAAABAAAAAAAQAAkAAAABAAAAAAARAAkAAAABAAAAAAASAAkAAAABAAAAAAATAAkAAAABAAAAAAAUAAkAAAABAAAAAAAVAAkAAAABAAAAAAAWAAkAAAABAAAAAAAXAAkAAAABAAAAAAAYAAkAAAABAAAAAAAbAAkAAAABAAAAAAAcAAkAAAABAAAAAAAdAAkAAAABAAAAAAAeAAkAAAABAAAAAAAfAAkAAAABAAAAAAAgAAkAAAABAAAAAAAhAAkAAAABAAAAAAAiAAkAAAABAAAAAAAjAAkAAAABAAAAAAAkAAkAAAABAAAAAAAlAAkAAAABAAAAAAAmAAkAAAABAAAAAAAnAAkAAAABAAAAAAAoAAkAAAABAAAAAAApAAkAAAABAAAAAAAqAAkAAAABAAAAAAArAAkAAAABAAAAAAAsAAkAAAABAAAAAAAtAAkAAAABAAAAAAAuAAkAAAABAAAAAAAvAAkAAAABAAAAAAAwAAkAAAABAAAAAAAxAAkAAAABAAAAAAAyAAkAAAABAAAAAAAzAAkAAAABAAAAAAA0AAkAAAABAAAAAAA1AAkAAAABAAAAAAA2AAkAAAABAAAAAAA3AAkAAAABAAAAAAA4AAkAAAABAAAAAAA5AAkAAAABAAAAAAAIAAcAAAABAAAAAAAJAAcAAAABAAAAAAAKAAcAAAABAAAAAAALAAcAAAABAAAAAAARAAYAAAABAAAAAAASAAYAAAABAAAAAAATAAYAAAABAAAAAAAUAAYAAAABAAAAAAAbAAUAAAABAAAAAAAcAAUAAAABAAAAAAAdAAUAAAABAAAAAAAeAAUAAAABAAAAAAARAAgAAAACAAAAAAAaAAgAAAADAAAAAAA=")
+tile_set = SubResource("TileSet_gg43x")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1051067154]
+position = Vector2(128, 500)
+
+[node name="PortalSpawn" type="Marker2D" parent="." unique_id=1597062161]
+position = Vector2(3550, 500)
